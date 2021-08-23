@@ -430,7 +430,7 @@ public class HTY711 extends CordovaPlugin {
                     Log.d(TAG, "ENCODED PIN WITH FUNCTION: "+deviceApi.getEncPinblock("1234"));
                     callbackContext.success(result.get("cardNumber"));
                 }else{
-                    callbackContext.error("Error al leer la tarjeta")
+                    callbackContext.error("Error al leer la tarjeta");
                 }
 
             }
