@@ -10,24 +10,13 @@ import android.bluetooth.le.ScanFilter;
 import android.bluetooth.le.ScanResult;
 import android.bluetooth.le.ScanSettings;
 import android.content.Context;
-import android.content.pm.PackageManager;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
-import android.view.View;
-
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import com.whty.TYMPosEMVdemo.utils.UIMessage;
-import com.whty.audio.manage.util.Utils;
 import com.whty.comm.inter.ICommunication;
-import com.whty.device.utils.GPMethods;
 import com.whty.tymposapi.DeviceApi;
 
 import java.io.UnsupportedEncodingException;
