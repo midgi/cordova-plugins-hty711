@@ -36,6 +36,8 @@ import org.apache.cordova.CallbackContext;
 import org.apache.cordova.CordovaPlugin;
 import org.apache.cordova.CordovaInterface;
 
+import cordova.plugin.hty711.*;
+
 // Get context
 //Context context=this.cordova.getActivity().getApplicationContext();
 /**

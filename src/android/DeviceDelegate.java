@@ -1,10 +1,10 @@
-package com.example.test_hty711;
+package cordova.plugin.hty711;
 
 import java.util.HashMap;
 
 import android.os.Handler;
 
-import com.example.test_hty711.SharedMSG;
+import cordova.plugin.hty711.SharedMSG;
 import com.whty.TYMPosEMVdemo.utils.UIMessage;
 import com.whty.tymposapi.IDeviceDelegate;
 
