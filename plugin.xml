@@ -15,11 +15,12 @@
         <config-file parent="/*" target="AndroidManifest.xml"></config-file>
         <framework src="androidx.appcompat:appcompat:1.0.0" />
         <lib-file src="src/android/libs/TYMPosEMVLib_V1.00.03.R5868.jar"/>
-        <source-file src="src/android/HTY711.java" target-dir="src/cordova/plugin/hty711/HTY711" />
         <source-file src="src/android/CardInfo.java" target-dir="src/cordova/plugin/hty711/CardInfo" />
         <source-file src="src/android/DeviceDelegate.java" target-dir="src/cordova/plugin/hty711/DeviceDelegate" />
         <source-file src="src/android/PrintMessage.java" target-dir="src/cordova/plugin/hty711/PrintMessage" />
         <source-file src="src/android/SharedMSG.java" target-dir="src/cordova/plugin/hty711/SharedMSG" />
         <source-file src="src/android/UIMessage.java" target-dir="src/cordova/plugin/hty711/UIMessage" />
+        <source-file src="src/android/HTY711.java" target-dir="src/cordova/plugin/hty711/HTY711" />
+        
     </platform>
 </plugin>

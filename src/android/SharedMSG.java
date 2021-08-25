@@ -1,4 +1,4 @@
-package com.example.test_hty711;
+package cordova.plugin.hty711;
 
 public class SharedMSG {
 	

@@ -1,4 +1,4 @@
-package com.whty.TYMPosEMVdemo.utils;
+package cordova.plugin.hty711;
 
 public class UIMessage {
     public static String exit_dialog_title;
