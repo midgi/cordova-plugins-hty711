@@ -394,10 +394,7 @@ public class HTY711 extends CordovaPlugin {
                 String terminalTime = format.format(new Date());
                 Log.e(TAG, "terminalTime:" + terminalTime);
 
-                Map<String, String> result = deviceApi
-                        .readCard(Integer.toString(amount*100),
-                                terminalTime.subString(2),
-                                (byte) 0x00, (byte) 0x64, (byte) 0x07);
+                Map<String, String> result = deviceApi.readCard(Integer.toString(amount*100), terminalTime.subString(2), (byte) 0x00, (byte) 0x64, (byte) 0x07);
                 Log.d(TAG, "readCard done!");
                 if(result != null){
                     for (Map.Entry<String, String> entry : result.entrySet()) {
