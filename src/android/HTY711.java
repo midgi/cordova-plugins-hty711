@@ -46,7 +46,7 @@ import cordova.plugin.hty711.*;
 // Get context
 //Context context=this.cordova.getActivity().getApplicationContext();
 /**
- * This class echoes a string called from JavaScript.
+ * This class echoes a String called from JavaScript.
  */
 public class HTY711 extends CordovaPlugin {
 
@@ -396,7 +396,7 @@ public class HTY711 extends CordovaPlugin {
 
                 Map<String, String> result = deviceApi
                         .readCard(Integer.toString(amount*100),
-                                terminalTime.substring(2),
+                                terminalTime.subString(2),
                                 (byte) 0x00, (byte) 0x64, (byte) 0x07);
                 Log.d(TAG, "readCard done!");
                 if(result != null){
@@ -414,9 +414,9 @@ public class HTY711 extends CordovaPlugin {
                     cardInfo.setCardNo(result.get("cardNumber"));
                     cardInfo.setAmount(Integer.toString(amount));
                     cardInfo.setSwipeCardDate(terminalTime
-                            .substring(0, 8));
+                            .subString(0, 8));
                     cardInfo.setSwipeCardTime(terminalTime
-                            .substring(8));
+                            .subString(8));
                     cardInfo.setValidThru(result
                             .get("expiryDate"));
                     cardInfo.setIcData55(result.get("icData"));
@@ -458,11 +458,11 @@ public class HTY711 extends CordovaPlugin {
                     // �������ʱ��ע�ⲻҪ��С���㣬�����Ҫ��1.50��д��"150";
                     // ���뽻������ (byte)0x00�������ѣ�(byte)0x31������ѯ���
                     // deviceApi.readCard("150",
-                    // terminalTime.substring(2), (byte) 0x00,
+                    // terminalTime.subString(2), (byte) 0x00,
                     // (byte) 0x64, (byte) 0x00);
                     Map<String, String> result = deviceApi
                             .readCard(amount,
-                                    terminalTime.substring(2),
+                                    terminalTime.subString(2),
                                     (byte) 0x00, (byte) 0x64, (byte) 0x07);
                     Log.d(TAG, "readCard done!");
                     if(result != null){
@@ -480,9 +480,9 @@ public class HTY711 extends CordovaPlugin {
                         cardInfo.setCardNo(result.get("cardNumber"));
                         cardInfo.setAmount(amount);
                         cardInfo.setSwipeCardDate(terminalTime
-                                .substring(0, 8));
+                                .subString(0, 8));
                         cardInfo.setSwipeCardTime(terminalTime
-                                .substring(8));
+                                .subString(8));
                         cardInfo.setValidThru(result
                                 .get("expiryDate"));
                         cardInfo.setIcData55(result.get("icData"));
@@ -550,7 +550,7 @@ public class HTY711 extends CordovaPlugin {
         }else if(action.equals("customInput")){
             cordova.getThreadPool().execute(new Runnable() {
                 public void run(){
-                    HashMap<string, string> resp = customInput(args.getString(0), args.getString(1));
+                    HashMap<String, String> resp = customInput(args.getString(0), args.getString(1));
                     if(resp!=null && resp.get("errorcode").equals("9000")){
                         callbackContext.success(resp.get("amount"));
                     }else{
@@ -567,10 +567,10 @@ public class HTY711 extends CordovaPlugin {
             clearDisplay();
             callbackContext.success("hecho");
         }else if(action.equals("displayText")){
-            displayText(args.getString(0));
+            displayText(args.getString(0), 3000);
             callbackContext.success("hecho");
         }else if(action.equals("isConnected")){
-            callbackContext.success(isConnected());
+            callbackContext.success(""+isConnected());
         }
         return false;
     }
@@ -579,7 +579,7 @@ public class HTY711 extends CordovaPlugin {
         if (message != null && message.length() > 0) {
             callbackContext.success(message);
         } else {
-            callbackContext.error("Expected one non-empty string argument.");
+            callbackContext.error("Expected one non-empty String argument.");
         }
     }
 }

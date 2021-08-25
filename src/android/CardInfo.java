@@ -15,8 +15,18 @@ public class CardInfo {
 	// IC��55��
 	private String icData55 = null;
 
+	private String pin = null;
+
 	public String getCardNo() {
 		return cardNo;
+	}
+
+	public String getPin(){
+		return this.pin;
+	}
+
+	public void setPin(String pin){
+		this.pin = pin;
 	}
 
 	public void setCardNo(String cardNo) {
