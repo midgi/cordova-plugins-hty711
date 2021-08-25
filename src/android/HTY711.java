@@ -15,7 +15,8 @@ import android.os.Looper;
 import android.os.Message;
 import android.util.Log;
 
-import com.whty.TYMPosEMVdemo.utils.UIMessage;
+import cordova.plugin.hty711.UIMessage;
+import cordova.plugin.hty711.CardInfo;
 import com.whty.comm.inter.ICommunication;
 import com.whty.tymposapi.DeviceApi;
 

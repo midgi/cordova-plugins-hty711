@@ -5,7 +5,7 @@ import java.util.HashMap;
 import android.os.Handler;
 
 import cordova.plugin.hty711.SharedMSG;
-import com.whty.TYMPosEMVdemo.utils.UIMessage;
+import cordova.plugin.hty711.UIMessage;
 import com.whty.tymposapi.IDeviceDelegate;
 
 public class DeviceDelegate implements IDeviceDelegate {
