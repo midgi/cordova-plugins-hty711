@@ -18,7 +18,6 @@
         <source-file src="src/android/HTY711.java" target-dir="src/cordova/plugin/hty711/HTY711" />
         <source-file src="src/android/CardInfo.java" target-dir="src/cordova/plugin/hty711/CardInfo" />
         <source-file src="src/android/DeviceDelegate.java" target-dir="src/cordova/plugin/hty711/DeviceDelegate" />
-        <source-file src="src/android/DeviceListViewAdapter.java" target-dir="src/cordova/plugin/hty711/DeviceListViewAdapter" />
         <source-file src="src/android/PrintMessage.java" target-dir="src/cordova/plugin/hty711/PrintMessage" />
         <source-file src="src/android/SharedMSG.java" target-dir="src/cordova/plugin/hty711/SharedMSG" />
         <source-file src="src/android/UIMessage.java" target-dir="src/cordova/plugin/hty711/UIMessage" />
