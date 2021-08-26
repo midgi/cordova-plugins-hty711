@@ -550,11 +550,15 @@ public class HTY711 extends CordovaPlugin {
         }else if(action.equals("customInput")){
             cordova.getThreadPool().execute(new Runnable() {
                 public void run(){
-                    HashMap<String, String> resp = customInput(args.getString(0), args.getString(1));
-                    if(resp!=null && resp.get("errorcode").equals("9000")){
-                        callbackContext.success(resp.get("amount"));
-                    }else{
-                        callbackContext.error("Hubo un problema al pedir respuesta del usuario");
+                    try{
+                        HashMap<String, String> resp = customInput(args.getString(0), args.getString(1));
+                        if(resp!=null && resp.get("errorcode").equals("9000")){
+                            callbackContext.success(resp.get("amount"));
+                        }else{
+                            callbackContext.error("Hubo un problema al pedir respuesta del usuario");
+                        }
+                    }catch(JSONException e){
+                        callbackContext.error("unknown error");
                     }
                 }
             });
