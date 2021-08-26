@@ -9,7 +9,7 @@
     <platform name="android">
         <config-file parent="/*" target="res/xml/config.xml">
             <feature name="HTY711">
-                <param name="android-package" value="cordova.plugin.hty711" />
+                <param name="android-package" value="cordova.plugin.hty711.HTY711" />
             </feature>
         </config-file>
         <config-file parent="/*" target="AndroidManifest.xml"></config-file>
