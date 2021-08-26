@@ -241,6 +241,7 @@ public class HTY711 extends CordovaPlugin {
                 deviceList.add(device);
 
                 onDeviceFound(device);
+                Log.d(TAG, device.getName() + " rssi: " + result.getRssi() + "\n");
                 //deviceDisplayList.add(device.getName() + " rssi: " + result.getRssi() + "\n");
                 //deviceListViewAdapter.notifyDataSetChanged();
             }

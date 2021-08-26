@@ -24,6 +24,6 @@ exports.displayText = function (arg0, success, error) {
     exec(success, error, 'HTY711', 'displayText', [arg0]);
 };
 
-exports.isConnecteed = function (arg0, success, error) {
-    exec(success, error, 'HTY711', 'isConnecteed', [arg0]);
+exports.isConnected = function (arg0, success, error) {
+    exec(success, error, 'HTY711', 'isConnected', [arg0]);
 };
