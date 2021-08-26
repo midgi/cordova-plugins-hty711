@@ -394,7 +394,10 @@ public class HTY711 extends CordovaPlugin {
                 String terminalTime = format.format(new Date());
                 Log.e(TAG, "terminalTime:" + terminalTime);
 
-                Map<String, String> result = deviceApi.readCard(Integer.toString(amount*100), terminalTime.subString(2), (byte) 0x00, (byte) 0x64, (byte) 0x07);
+                Map<String, String> result = deviceApi
+                        .readCard(Integer.toString(amount*100),
+                                terminalTime.substring(2),
+                                (byte) 0x00, (byte) 0x64, (byte) 0x07);
                 Log.d(TAG, "readCard done!");
                 if(result != null){
                     for (Map.Entry<String, String> entry : result.entrySet()) {
@@ -411,9 +414,9 @@ public class HTY711 extends CordovaPlugin {
                     cardInfo.setCardNo(result.get("cardNumber"));
                     cardInfo.setAmount(Integer.toString(amount));
                     cardInfo.setSwipeCardDate(terminalTime
-                            .subString(0, 8));
+                            .substring(0, 8));
                     cardInfo.setSwipeCardTime(terminalTime
-                            .subString(8));
+                            .substring(8));
                     cardInfo.setValidThru(result
                             .get("expiryDate"));
                     cardInfo.setIcData55(result.get("icData"));
@@ -455,11 +458,11 @@ public class HTY711 extends CordovaPlugin {
                     // �������ʱ��ע�ⲻҪ��С���㣬�����Ҫ��1.50��д��"150";
                     // ���뽻������ (byte)0x00�������ѣ�(byte)0x31������ѯ���
                     // deviceApi.readCard("150",
-                    // terminalTime.subString(2), (byte) 0x00,
+                    // terminalTime.substring(2), (byte) 0x00,
                     // (byte) 0x64, (byte) 0x00);
                     Map<String, String> result = deviceApi
                             .readCard(amount,
-                                    terminalTime.subString(2),
+                                    terminalTime.substring(2),
                                     (byte) 0x00, (byte) 0x64, (byte) 0x07);
                     Log.d(TAG, "readCard done!");
                     if(result != null){
@@ -477,9 +480,9 @@ public class HTY711 extends CordovaPlugin {
                         cardInfo.setCardNo(result.get("cardNumber"));
                         cardInfo.setAmount(amount);
                         cardInfo.setSwipeCardDate(terminalTime
-                                .subString(0, 8));
+                                .substring(0, 8));
                         cardInfo.setSwipeCardTime(terminalTime
-                                .subString(8));
+                                .substring(8));
                         cardInfo.setValidThru(result
                                 .get("expiryDate"));
                         cardInfo.setIcData55(result.get("icData"));
