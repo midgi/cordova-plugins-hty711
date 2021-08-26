@@ -562,7 +562,7 @@ public class HTY711 extends CordovaPlugin {
             init();
             callbackContext.success("hecho");
         }else if(action.equals("readGiftCard")){
-            readGiftCard(args.getLong(0), callbackContext);
+            readGiftCard(args.getInt(0), callbackContext);
         }else if(action.equals("clearDisplay")){
             clearDisplay();
             callbackContext.success("hecho");
