@@ -545,6 +545,7 @@ public class HTY711 extends CordovaPlugin {
 
     @Override
     public boolean execute(String action, JSONArray args, CallbackContext callbackContext) throws JSONException {
+        Log.d(TAG, "action: " + action);
         if (action.equals("coolMethod")) {
             String message = args.getString(0);
             this.coolMethod(message, callbackContext);
@@ -560,25 +561,33 @@ public class HTY711 extends CordovaPlugin {
             }catch(JSONException e){
                 callbackContext.error("unknown error");
             }
+            return true;
         }else if(action.equals("init")){
             init();
             callbackContext.success("hecho");
+            return true;
         }else if(action.equals("readGiftCard")){
             readGiftCard(args.getInt(0), callbackContext);
+            return true;
         }else if(action.equals("clearDisplay")){
             clearDisplay();
             callbackContext.success("hecho");
+            return true;
         }else if(action.equals("displayText")){
             displayText(args.getString(0), 3000);
             callbackContext.success("hecho");
+            return true;
         }else if(action.equals("isConnected")){
             callbackContext.success(""+isConnected());
+            return true;
         }else if(action.equals("startScan")){
             startScanning();
             callbackContext.success("hecho");
+            return true;
         }else if(action.equals("stopScan")){
             stopScanning();
             callbackContext.success("hecho");
+            return true;
         }
         return false;
     }
