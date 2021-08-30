@@ -27,3 +27,11 @@ exports.displayText = function (arg0, success, error) {
 exports.isConnected = function (arg0, success, error) {
     exec(success, error, 'HTY711', 'isConnected', [arg0]);
 };
+
+exports.startScan = function (arg0, success, error) {
+    exec(success, error, 'HTY711', 'startScan', [arg0]);
+};
+
+exports.stopScan = function (arg0, success, error) {
+    exec(success, error, 'HTY711', 'stopScan', [arg0]);
+};

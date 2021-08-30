@@ -195,22 +195,22 @@ public class HTY711 extends CordovaPlugin {
             adapter = bluetoothManager.getAdapter();
         }
 
-        new Thread(){
-            public void run(){
-                while(true){
-                    if(!connecting && !deviceApi.isConnected() && !scanning){
-                        deviceConnected = false;
-                        startScanning();
-                    }
-                    try {
-                        Thread.sleep(1000);
-                        // Do some stuff
-                    } catch (Exception e) {
-                        e.getLocalizedMessage();
-                    }
-                }
-            }
-        }.start();
+        // new Thread(){
+        //     public void run(){
+        //         while(true){
+        //             if(!connecting && !deviceApi.isConnected() && !scanning){
+        //                 deviceConnected = false;
+        //                 startScanning();
+        //             }
+        //             try {
+        //                 Thread.sleep(1000);
+        //                 // Do some stuff
+        //             } catch (Exception e) {
+        //                 e.getLocalizedMessage();
+        //             }
+        //         }
+        //     }
+        // }.start();
 
         Log.d(TAG, "hty711 inited waiting for bt connection");
     }
@@ -386,53 +386,54 @@ public class HTY711 extends CordovaPlugin {
     }
 
     public void readGiftCard(int amount, CallbackContext callbackContext){
-        new Thread() {
-            public void run() {
-                Log.d(TAG, "start read gift card thread");
-                setName("swipeCardThread");
-                SimpleDateFormat format = new SimpleDateFormat(
-                        "yyyyMMddHHmmss", Locale.getDefault());
-                String terminalTime = format.format(new Date());
-                Log.e(TAG, "terminalTime:" + terminalTime);
+        // new Thread() {
+        //     public void run() {
+        Log.d(TAG, "start read gift card thread");
+        setName("swipeCardThread");
+        SimpleDateFormat format = new SimpleDateFormat(
+                "yyyyMMddHHmmss", Locale.getDefault());
+        String terminalTime = format.format(new Date());
+        Log.e(TAG, "terminalTime:" + terminalTime);
 
-                Map<String, String> result = deviceApi
-                        .readCard(Integer.toString(amount*100),
-                                terminalTime.substring(2),
-                                (byte) 0x00, (byte) 0x64, (byte) 0x07);
-                Log.d(TAG, "readCard done!");
-                if(result != null){
-                    for (Map.Entry<String, String> entry : result.entrySet()) {
-                        Log.d(TAG,entry.getKey() + "=" + entry.getValue());
-                    }
-                }else{
-                    Log.d(TAG, "result is null");
-                }
-                if (result != null
-                        && "9000".equals(result
-                        .get("errorCode"))) {
-                    // ˢ���ɹ�������ˢ������
-                    cardInfo = new CardInfo();
-                    cardInfo.setCardNo(result.get("cardNumber"));
-                    cardInfo.setAmount(Integer.toString(amount));
-                    cardInfo.setSwipeCardDate(terminalTime
-                            .substring(0, 8));
-                    cardInfo.setSwipeCardTime(terminalTime
-                            .substring(8));
-                    cardInfo.setValidThru(result
-                            .get("expiryDate"));
-                    cardInfo.setIcData55(result.get("icData"));
-                    cardInfo.setPin(result.get("pin"));
-                    Log.d(TAG, "ˢ����Ϣ�ѱ���");
-                    deviceApi.confirmTransaction("Tarjeta leida exitosamente");
-                    Log.d(TAG, "ENCODED PIN WITH FUNCTION: "+deviceApi.getEncPinblock("1234"));
-                    callbackContext.success(result.get("cardNumber"));
-                }else{
-                    callbackContext.error("Error al leer la tarjeta");
-                }
-
+        Map<String, String> result = deviceApi
+                .readCard(Integer.toString(amount*100),
+                        terminalTime.substring(2),
+                        (byte) 0x00, (byte) 0x64, (byte) 0x07);
+        Log.d(TAG, "readCard done!");
+        if(result != null){
+            for (Map.Entry<String, String> entry : result.entrySet()) {
+                Log.d(TAG,entry.getKey() + "=" + entry.getValue());
             }
-        }.start();
+        }else{
+            Log.d(TAG, "result is null");
+        }
+        if (result != null
+                && "9000".equals(result
+                .get("errorCode"))) {
+            // ˢ���ɹ�������ˢ������
+            cardInfo = new CardInfo();
+            cardInfo.setCardNo(result.get("cardNumber"));
+            cardInfo.setAmount(Integer.toString(amount));
+            cardInfo.setSwipeCardDate(terminalTime
+                    .substring(0, 8));
+            cardInfo.setSwipeCardTime(terminalTime
+                    .substring(8));
+            cardInfo.setValidThru(result
+                    .get("expiryDate"));
+            cardInfo.setIcData55(result.get("icData"));
+            cardInfo.setPin(result.get("pin"));
+            Log.d(TAG, "ˢ����Ϣ�ѱ���");
+            deviceApi.confirmTransaction("Tarjeta leida exitosamente");
+            Log.d(TAG, "ENCODED PIN WITH FUNCTION: "+deviceApi.getEncPinblock("1234"));
+            callbackContext.success(result.get("cardNumber"));
+        }else{
+            callbackContext.error("Error al leer la tarjeta");
+        }
+
+        //     }
+        // }.start();
     }
+    
 
     public void readCard(){
         new Thread() {
@@ -576,6 +577,12 @@ public class HTY711 extends CordovaPlugin {
             callbackContext.success("hecho");
         }else if(action.equals("isConnected")){
             callbackContext.success(""+isConnected());
+        }else if(action.equals("startScan")){
+            startScanning();
+            callbackContext.success("hecho");
+        }else if(action.equals("stopScan")){
+            stopScanning();
+            callbackContext.success("hecho");
         }
         return false;
     }
