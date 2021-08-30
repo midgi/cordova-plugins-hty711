@@ -389,7 +389,7 @@ public class HTY711 extends CordovaPlugin {
         // new Thread() {
         //     public void run() {
         Log.d(TAG, "start read gift card thread");
-        setName("swipeCardThread");
+        // setName("swipeCardThread");
         SimpleDateFormat format = new SimpleDateFormat(
                 "yyyyMMddHHmmss", Locale.getDefault());
         String terminalTime = format.format(new Date());
