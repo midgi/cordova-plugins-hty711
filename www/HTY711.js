@@ -35,3 +35,8 @@ exports.startScan = function (arg0, success, error) {
 exports.stopScan = function (arg0, success, error) {
     exec(success, error, 'HTY711', 'stopScan', arg0);
 };
+
+exports.confirmTransaction = function (arg0, success, 
+    error) {
+    exec(success, error, 'HTY711', 'confirmTransaction', arg0);
+};

@@ -423,7 +423,7 @@ public class HTY711 extends CordovaPlugin {
             cardInfo.setIcData55(result.get("icData"));
             cardInfo.setPin(result.get("pin"));
             Log.d(TAG, "ˢ����Ϣ�ѱ���");
-            deviceApi.confirmTransaction("Tarjeta leida exitosamente");
+            
             Log.d(TAG, "ENCODED PIN WITH FUNCTION: "+deviceApi.getEncPinblock("1234"));
             callbackContext.success(result.get("cardNumber"));
         }else{
@@ -433,7 +433,10 @@ public class HTY711 extends CordovaPlugin {
         //     }
         // }.start();
     }
-    
+
+    public void confirmTransaction(String text){
+        deviceApi.confirmTransaction(text);
+    }    
 
     public void readCard(){
         new Thread() {
@@ -586,6 +589,10 @@ public class HTY711 extends CordovaPlugin {
             return true;
         }else if(action.equals("stopScan")){
             stopScanning();
+            callbackContext.success("hecho");
+            return true;
+        }else if(action.equals("confirmTransaction")){
+            confirmTransaction(args.getString(0));
             callbackContext.success("hecho");
             return true;
         }
