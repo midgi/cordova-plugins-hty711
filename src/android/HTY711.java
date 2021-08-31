@@ -553,7 +553,7 @@ public class HTY711 extends CordovaPlugin {
         }else if(action.equals("customInput")){
             try{
                 HashMap<String, String> resp = customInput(args.getString(0), args.getString(1));
-                if(resp!=null && resp.get("errorcode").equals("9000")){
+                if(resp!=null){
                     callbackContext.success(resp.get("amount"));
                 }else{
                     callbackContext.error("Hubo un problema al pedir respuesta del usuario");
