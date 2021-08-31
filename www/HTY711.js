@@ -40,3 +40,8 @@ exports.confirmTransaction = function (arg0, success,
     error) {
     exec(success, error, 'HTY711', 'confirmTransaction', arg0);
 };
+
+exports.readCard = function (arg0, success, 
+    error) {
+    exec(success, error, 'HTY711', 'readCard', arg0);
+};
