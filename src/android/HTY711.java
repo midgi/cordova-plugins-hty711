@@ -386,49 +386,56 @@ public class HTY711 extends CordovaPlugin {
     }
 
     public void readGiftCard(int amount, CallbackContext callbackContext){
+
+        cordova.getThreadPool().execute(new Runnable() {
+            @Override
+            public void run() {
+                Log.d(TAG, "start read gift card thread");
+                // setName("swipeCardThread");
+                SimpleDateFormat format = new SimpleDateFormat(
+                        "yyyyMMddHHmmss", Locale.getDefault());
+                String terminalTime = format.format(new Date());
+                Log.e(TAG, "terminalTime:" + terminalTime);
+        
+                Map<String, String> result = deviceApi
+                        .readCard(Integer.toString(amount*100),
+                                terminalTime.substring(2),
+                                (byte) 0x00, (byte) 0x64, (byte) 0x07);
+                Log.d(TAG, "readCard done!");
+                if(result != null){
+                    for (Map.Entry<String, String> entry : result.entrySet()) {
+                        Log.d(TAG,entry.getKey() + "=" + entry.getValue());
+                    }
+                }else{
+                    Log.d(TAG, "result is null");
+                }
+                if (result != null
+                        && "9000".equals(result
+                        .get("errorCode"))) {
+                    // ˢ���ɹ�������ˢ������
+                    cardInfo = new CardInfo();
+                    cardInfo.setCardNo(result.get("cardNumber"));
+                    cardInfo.setAmount(Integer.toString(amount));
+                    cardInfo.setSwipeCardDate(terminalTime
+                            .substring(0, 8));
+                    cardInfo.setSwipeCardTime(terminalTime
+                            .substring(8));
+                    cardInfo.setValidThru(result
+                            .get("expiryDate"));
+                    cardInfo.setIcData55(result.get("icData"));
+                    cardInfo.setPin(result.get("pin"));
+                    Log.d(TAG, "ˢ����Ϣ�ѱ���");
+                    
+                    //Log.d(TAG, "ENCODED PIN WITH FUNCTION: "+deviceApi.getEncPinblock("1234"));
+                    callbackContext.success(result.get("cardNumber"));
+                }else{
+                    callbackContext.error("Error al leer la tarjeta");
+                }
+            }
+        });
         // new Thread() {
         //     public void run() {
-        Log.d(TAG, "start read gift card thread");
-        // setName("swipeCardThread");
-        SimpleDateFormat format = new SimpleDateFormat(
-                "yyyyMMddHHmmss", Locale.getDefault());
-        String terminalTime = format.format(new Date());
-        Log.e(TAG, "terminalTime:" + terminalTime);
-
-        Map<String, String> result = deviceApi
-                .readCard(Integer.toString(amount*100),
-                        terminalTime.substring(2),
-                        (byte) 0x00, (byte) 0x64, (byte) 0x07);
-        Log.d(TAG, "readCard done!");
-        if(result != null){
-            for (Map.Entry<String, String> entry : result.entrySet()) {
-                Log.d(TAG,entry.getKey() + "=" + entry.getValue());
-            }
-        }else{
-            Log.d(TAG, "result is null");
-        }
-        if (result != null
-                && "9000".equals(result
-                .get("errorCode"))) {
-            // ˢ���ɹ�������ˢ������
-            cardInfo = new CardInfo();
-            cardInfo.setCardNo(result.get("cardNumber"));
-            cardInfo.setAmount(Integer.toString(amount));
-            cardInfo.setSwipeCardDate(terminalTime
-                    .substring(0, 8));
-            cardInfo.setSwipeCardTime(terminalTime
-                    .substring(8));
-            cardInfo.setValidThru(result
-                    .get("expiryDate"));
-            cardInfo.setIcData55(result.get("icData"));
-            cardInfo.setPin(result.get("pin"));
-            Log.d(TAG, "ˢ����Ϣ�ѱ���");
-            
-            Log.d(TAG, "ENCODED PIN WITH FUNCTION: "+deviceApi.getEncPinblock("1234"));
-            callbackContext.success(result.get("cardNumber"));
-        }else{
-            callbackContext.error("Error al leer la tarjeta");
-        }
+        
 
         //     }
         // }.start();
