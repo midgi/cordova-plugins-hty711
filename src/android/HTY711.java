@@ -387,7 +387,8 @@ public class HTY711 extends CordovaPlugin {
 
     public void readGiftCard(int amount, CallbackContext callbackContext){
 
-        cordova.getThreadPool().execute(new Runnable() {
+        // cordova.getThreadPool().execute(new Runnable() {
+        new Thread(){
             @Override
             public void run() {
                 Log.d(TAG, "start read gift card thread");
@@ -432,7 +433,7 @@ public class HTY711 extends CordovaPlugin {
                     callbackContext.error("Error al leer la tarjeta");
                 }
             }
-        });
+        }.start();
         // new Thread() {
         //     public void run() {
         
