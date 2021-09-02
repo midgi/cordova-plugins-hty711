@@ -620,7 +620,7 @@ public class HTY711 extends CordovaPlugin {
         }else if(action.trim().equalsIgnoreCase("confirmtransaction")){
             Log.d(TAG, "la accion es confirmtransaction");
             new Thread(){
-                public void main(){
+                public void run(){
                     try{
                         Log.d(TAG, "Antes de confirmar transaccion con texto: "+args.getString(0));
                         confirmTransaction(args.getString(0));
