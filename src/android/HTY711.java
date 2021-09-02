@@ -620,10 +620,16 @@ public class HTY711 extends CordovaPlugin {
         }else if(action.equals("confirmTransaction")){
             new Thread(){
                 public void main(){
-                    confirmTransaction(args.getString(0));
+                    try{
+                        confirmTransaction(args.getString(0));
+                        successOnThread("Hecho", callbackContext);
+                    }catch(JSONException err){
+                        Log.d(TAG, "Error en argumento para la confirmación de la transacción");
+                        errorOnThread("Error en argumento para la confirmación de la transacción", callbackContext);
+                    }
+                    
                 }
-            }.start();            
-            callbackContext.success("hecho");
+            }.start();
             return true;
         }
         return false;
