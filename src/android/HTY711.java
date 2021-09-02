@@ -617,7 +617,7 @@ public class HTY711 extends CordovaPlugin {
             stopScanning();
             callbackContext.success("hecho");
             return true;
-        }else if(action.equals("confirmTransaction")){
+        }else if(action.trim().equalsIgnoreCase("confirmtransaction")){
             new Thread(){
                 public void main(){
                     try{
