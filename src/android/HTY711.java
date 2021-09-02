@@ -622,6 +622,7 @@ public class HTY711 extends CordovaPlugin {
             new Thread(){
                 public void main(){
                     try{
+                        Log.d(TAG, "Antes de confirmar transaccion con texto: "+args.getString(0));
                         confirmTransaction(args.getString(0));
                         Log.d(TAG, "se confirma transaccion con texto: "+args.getString(0));
                         successOnThread("Hecho", callbackContext);
