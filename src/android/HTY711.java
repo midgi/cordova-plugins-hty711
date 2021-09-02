@@ -430,7 +430,7 @@ public class HTY711 extends CordovaPlugin {
                     cardInfo.setIcData55(result.get("icData"));
                     cardInfo.setPin(result.get("pin"));
                     Log.d(TAG, "ˢ����Ϣ�ѱ���");
-                    deviceApi.confirmTransaction("GiftCard leida exitosamente");
+                    deviceApi.confirmTransaction("GiftCard leida correctamente");
                     successOnThread(cardInfo.getCardNo()+","+cardInfo.getPin(), callbackContext);
                 }else{
                     errorOnThread("Unkown error", callbackContext);
@@ -617,22 +617,9 @@ public class HTY711 extends CordovaPlugin {
             stopScanning();
             callbackContext.success("hecho");
             return true;
-        }else if(action.trim().equalsIgnoreCase("confirmtransaction")){
-            Log.d(TAG, "la accion es confirmtransaction");
-            new Thread(){
-                public void run(){
-                    try{
-                        Log.d(TAG, "Antes de confirmar transaccion con texto: "+args.getString(0));
-                        confirmTransaction(args.getString(0));
-                        Log.d(TAG, "se confirma transaccion con texto: "+args.getString(0));
-                        successOnThread("Hecho", callbackContext);
-                    }catch(JSONException err){
-                        Log.d(TAG, "Error en argumento para la confirmación de la transacción");
-                        errorOnThread("Error en argumento para la confirmación de la transacción", callbackContext);
-                    }
-                    
-                }
-            }.start();
+        }else if(action.equals("confirmTransaction")){
+            confirmTransaction(args.getString(0));
+            callbackContext.success("hecho");
             return true;
         }
         return false;
