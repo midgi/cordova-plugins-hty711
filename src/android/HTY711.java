@@ -622,6 +622,7 @@ public class HTY711 extends CordovaPlugin {
                 public void main(){
                     try{
                         confirmTransaction(args.getString(0));
+                        Log.d(TAG, "se confirma transaccion con texto: "+args.getString(0));
                         successOnThread("Hecho", callbackContext);
                     }catch(JSONException err){
                         Log.d(TAG, "Error en argumento para la confirmación de la transacción");
