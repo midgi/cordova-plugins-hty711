@@ -431,11 +431,28 @@ public class HTY711 extends CordovaPlugin {
                     cardInfo.setPin(result.get("pin"));
                     Log.d(TAG, "ˢ����Ϣ�ѱ���");
                     //deviceApi.confirmTransaction("Se confirma la transa");
-                    callbackContext.success(cardInfo.getCardNo()+","+cardInfo.getPin());
+                    successOnThread(cardInfo.getCardNo()+","+cardInfo.getPin(), callbackContext);
                 }else{
-                    callbackContext.error("Unkown error");
+                    errorOnThread("Unkown error", callbackContext);
                 }
                 
+            }
+        }.start();
+    }
+
+    private void successOnThread(String message, CallbackContext callbackContext){
+        new Thread(){
+            public void run(){
+                callbackContext.success(message);
+            }
+        }.start();
+        
+    }
+
+    private void errorOnThread(String message, CallbackContext callbackContext){
+        new Thread(){
+            public void run(){
+                callbackContext.error(message);
             }
         }.start();
     }
