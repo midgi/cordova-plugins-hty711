@@ -387,19 +387,23 @@ public class HTY711 extends CordovaPlugin {
 
     public void readGiftCard(int amount, CallbackContext callbackContext){
 
-        // cordova.getThreadPool().execute(new Runnable() {
-        new Thread(){
-            @Override
+        new Thread() {
             public void run() {
-                Log.d(TAG, "start read gift card thread");
-                // setName("swipeCardThread");
+ 
+                setName("swipeCardThread");
                 SimpleDateFormat format = new SimpleDateFormat(
                         "yyyyMMddHHmmss", Locale.getDefault());
                 String terminalTime = format.format(new Date());
                 Log.e(TAG, "terminalTime:" + terminalTime);
-        
+                // ����2014-12-03 16:20:55
+                // ��terminalTime����"141203162055";
+                // �������ʱ��ע�ⲻҪ��С���㣬�����Ҫ��1.50��д��"150";
+                // ���뽻������ (byte)0x00�������ѣ�(byte)0x31������ѯ���
+                // deviceApi.readCard("150",
+                // terminalTime.substring(2), (byte) 0x00,
+                // (byte) 0x64, (byte) 0x00);
                 Map<String, String> result = deviceApi
-                        .readCard(Integer.toString(amount*100),
+                        .readCard(Integer.toString(amount),
                                 terminalTime.substring(2),
                                 (byte) 0x00, (byte) 0x64, (byte) 0x07);
                 Log.d(TAG, "readCard done!");
@@ -426,20 +430,11 @@ public class HTY711 extends CordovaPlugin {
                     cardInfo.setIcData55(result.get("icData"));
                     cardInfo.setPin(result.get("pin"));
                     Log.d(TAG, "ˢ����Ϣ�ѱ���");
-                    
-                    //Log.d(TAG, "ENCODED PIN WITH FUNCTION: "+deviceApi.getEncPinblock("1234"));
-                    // callbackContext.success(result.get("cardNumber"));
-                }else{
-                    // callbackContext.error("Error al leer la tarjeta");
+                    deviceApi.confirmTransaction("Se confirma la transa");
                 }
+                
             }
         }.start();
-        // new Thread() {
-        //     public void run() {
-        
-
-        //     }
-        // }.start();
     }
 
     public void confirmTransaction(String text){
