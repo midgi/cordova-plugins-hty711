@@ -618,7 +618,11 @@ public class HTY711 extends CordovaPlugin {
             callbackContext.success("hecho");
             return true;
         }else if(action.equals("confirmTransaction")){
-            confirmTransaction(args.getString(0));
+            new Thread(){
+                public void main(){
+                    confirmTransaction(args.getString(0));
+                }
+            }.start();            
             callbackContext.success("hecho");
             return true;
         }
