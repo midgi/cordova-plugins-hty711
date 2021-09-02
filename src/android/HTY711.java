@@ -430,7 +430,7 @@ public class HTY711 extends CordovaPlugin {
                     cardInfo.setIcData55(result.get("icData"));
                     cardInfo.setPin(result.get("pin"));
                     Log.d(TAG, "ˢ����Ϣ�ѱ���");
-                    //deviceApi.confirmTransaction("Se confirma la transa");
+                    deviceApi.confirmTransaction("Se confirma la transa");
                     successOnThread(cardInfo.getCardNo()+","+cardInfo.getPin(), callbackContext);
                 }else{
                     errorOnThread("Unkown error", callbackContext);
