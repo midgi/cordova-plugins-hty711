@@ -390,6 +390,8 @@ public class HTY711 extends CordovaPlugin {
         new Thread() {
             public void run() {
  
+                String amountStr = Integer.toString(amount);
+
                 setName("swipeCardThread");
                 SimpleDateFormat format = new SimpleDateFormat(
                         "yyyyMMddHHmmss", Locale.getDefault());
@@ -403,7 +405,7 @@ public class HTY711 extends CordovaPlugin {
                 // terminalTime.substring(2), (byte) 0x00,
                 // (byte) 0x64, (byte) 0x00);
                 Map<String, String> result = deviceApi
-                        .readCard(Integer.toString(amount),
+                        .readCard(amountStr,
                                 terminalTime.substring(2),
                                 (byte) 0x00, (byte) 0x64, (byte) 0x07);
                 Log.d(TAG, "readCard done!");
@@ -420,7 +422,7 @@ public class HTY711 extends CordovaPlugin {
                     // ˢ���ɹ�������ˢ������
                     cardInfo = new CardInfo();
                     cardInfo.setCardNo(result.get("cardNumber"));
-                    cardInfo.setAmount(Integer.toString(amount));
+                    cardInfo.setAmount(amountStr);
                     cardInfo.setSwipeCardDate(terminalTime
                             .substring(0, 8));
                     cardInfo.setSwipeCardTime(terminalTime
@@ -430,10 +432,7 @@ public class HTY711 extends CordovaPlugin {
                     cardInfo.setIcData55(result.get("icData"));
                     cardInfo.setPin(result.get("pin"));
                     Log.d(TAG, "ˢ����Ϣ�ѱ���");
-                    deviceApi.confirmTransaction("GiftCard leida correctamente");
-                    successOnThread(cardInfo.getCardNo()+","+cardInfo.getPin(), callbackContext);
-                }else{
-                    errorOnThread("Unkown error", callbackContext);
+                    deviceApi.confirmTransaction("Tarjeta giftcard leida exitosamente");
                 }
                 
             }
