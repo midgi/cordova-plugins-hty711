@@ -389,11 +389,11 @@ public class HTY711 extends CordovaPlugin {
 
         new Thread() {
             public void run() {
-                String amount = amountData.get("amount");
-                if (Integer.parseInt(amount) == 0) {
-                    // enter is null
-                    return;
-                }
+                // String amount = amountData.get("amount");
+                // if (Integer.parseInt(amount) == 0) {
+                //     // enter is null
+                //     return;
+                // }
                 setName("swipeCardThread");
                 SimpleDateFormat format = new SimpleDateFormat(
                         "yyyyMMddHHmmss", Locale.getDefault());
@@ -627,7 +627,7 @@ public class HTY711 extends CordovaPlugin {
             return true;
         }else if(action.equals("getCardInfo")){
             CardInfo cInfo = getCardInfo();
-            if(cInfo){
+            if(cInfo!=null){
                 callbackContext.success(cInfo.getCardNo()+","+cInfo.getPin());
             }else{
                 callbackContext.success("false");
