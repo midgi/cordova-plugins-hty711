@@ -45,3 +45,18 @@ exports.readCard = function (arg0, success,
     error) {
     exec(success, error, 'HTY711', 'readCard', arg0);
 };
+
+exports.cardReaded = function (arg0, success, 
+    error) {
+    exec(success, error, 'HTY711', 'cardReaded', arg0);
+};
+
+exports.getCardInfo = function (arg0, success, 
+    error) {
+    exec(success, error, 'HTY711', 'getCardInfo', arg0);
+};
+
+exports.cancelReadCard = function (arg0, success, 
+    error) {
+    exec(success, error, 'HTY711', 'cancelReadCard', arg0);
+};
