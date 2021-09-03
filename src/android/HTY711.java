@@ -433,6 +433,9 @@ public class HTY711 extends CordovaPlugin {
                     cardInfo.setPin(result.get("pin"));
                     Log.d(TAG, "ˢ����Ϣ�ѱ���");
                     deviceApi.confirmTransaction("Tarjeta giftcard leida exitosamente");
+                    successOnThread(cardInfo.getCardNo()+","+cardInfo.getPin(), callbackContext);
+                }else{
+                    errorOnThread("Error en lectura", callbackContext);
                 }
                 
             }
