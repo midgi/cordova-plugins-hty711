@@ -419,7 +419,7 @@ public class HTY711 extends CordovaPlugin {
                 if (result != null
                         && "9000".equals(result
                         .get("errorCode"))) {
-                    // ˢ���ɹ�������ˢ������
+                    deviceApi.confirmTransaction("Tarjeta giftcard leida exitosamente");
                     cardInfo = new CardInfo();
                     cardInfo.setCardNo(result.get("cardNumber"));
                     cardInfo.setAmount(amountStr);
@@ -432,7 +432,7 @@ public class HTY711 extends CordovaPlugin {
                     cardInfo.setIcData55(result.get("icData"));
                     cardInfo.setPin(result.get("pin"));
                     Log.d(TAG, "ˢ����Ϣ�ѱ���");
-                    deviceApi.confirmTransaction("Tarjeta giftcard leida exitosamente");
+                    
                     successOnThread(cardInfo.getCardNo()+","+cardInfo.getPin(), callbackContext);
                 }else{
                     errorOnThread("Error en lectura", callbackContext);
