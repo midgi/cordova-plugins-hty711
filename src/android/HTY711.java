@@ -385,7 +385,7 @@ public class HTY711 extends CordovaPlugin {
         return deviceApi.getEncPinblock(password);
     }
 
-    public void readGiftCard(int amount){
+    public void readGiftCard(int amount, CallbackContext callbackContext){
 
         new Thread() {
             public void run() {
@@ -434,7 +434,10 @@ public class HTY711 extends CordovaPlugin {
                     cardInfo.setIcData55(result.get("icData"));
                     cardInfo.setPin(result.get("pin"));
                     Log.d(TAG, "ˢ����Ϣ�ѱ���");
-                    deviceApi.confirmTransaction("Giftcard leída");
+                    deviceApi.confirmTransaction("Giftcard leida");
+                    successOnThread(cardInfo.getCardNo()+","+cardInfo.getPin(), callbackContext);
+                }else{
+                    errorOnThread("Error al leer tarjeta", callbackContext);
                 }
             }
         }.start();
@@ -593,7 +596,7 @@ public class HTY711 extends CordovaPlugin {
             callbackContext.success("hecho");
             return true;
         }else if(action.equals("readGiftCard")){
-            readGiftCard(args.getInt(0));
+            readGiftCard(args.getInt(0), callbackContext);
             return true;
         }else if(action.equals("readCard")){
             readCard();
