@@ -225,7 +225,7 @@ public class HTY711 extends CordovaPlugin {
     }
 
     public void onDeviceFound(BluetoothDevice device){
-        if(device.getName()!=null && device.getName().equalsIgnoreCase(DEVICE_NAME)){
+        if(device.getName()!=null && device.getName().toLowerCase().contains(DEVICE_NAME)){
             this.connectDevice(device);
         }
     }
