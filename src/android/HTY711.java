@@ -236,7 +236,7 @@ public class HTY711 extends CordovaPlugin {
         public void onScanResult(int callbackType, final ScanResult result) {
             //Do something with results
             BluetoothDevice device = adapter.getRemoteDevice(result.getDevice().getAddress());
-            Log.d(TAG,device.getName() + " " + device.getAddress());
+            Log.d(TAG, "scan result: "+device.getName() + " " + device.getAddress());
             if (!deviceExists(device)) {
                 deviceList.add(device);
 
@@ -537,7 +537,7 @@ public class HTY711 extends CordovaPlugin {
         scanning = true;
         Log.d(TAG,"start scanning");
 
-        deviceList.clear();
+        deviceList.removeAll();
         scanner = adapter.getBluetoothLeScanner();
         ScanSettings scanSettings = new ScanSettings.Builder().setScanMode(ScanSettings.SCAN_MODE_LOW_POWER).build();
         List<ScanFilter> scanFilters = Arrays.asList(
@@ -551,7 +551,7 @@ public class HTY711 extends CordovaPlugin {
 
     public void stopScanning() {
         Log.d(TAG,"stopping scanning");
-        deviceList.clear();
+        deviceList.removeAll();
         if (scanner != null) {
             scanner.stopScan(myScanCallback);
         }
