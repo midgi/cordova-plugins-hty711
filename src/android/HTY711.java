@@ -108,7 +108,7 @@ public class HTY711 extends CordovaPlugin {
     }
 
     public boolean isConnected(){
-        return deviceConnected;
+        return deviceApi.isConnected();
     }
 
     public boolean isConnecting(){
