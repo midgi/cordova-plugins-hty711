@@ -314,26 +314,33 @@ public class HTY711 extends CordovaPlugin {
         }
 
         if (connecting) {
+            Log.d(TAG, "device is already connecting");
             // Toast.makeText(context,
             //         UIMessage.connecting_device, Toast.LENGTH_SHORT)
             //         .show();
         } else {
             if (deviceConnected) {
                 connecting = false;
+                Log.d(TAG, "device is already connected");
             } else {
+                Log.d(TAG, "going to stop scanning");
                 stopScanning();
                 if (device.getAddress() != null
                         && device.getAddress().length() > 0) {
+                    Log.d(TAG, "going to connect");
                     connecting = true;
                     new Thread() {
                         public void run() {
                             Looper.prepare();
+                            Log.d(TAG, "connecting...");
                             deviceApi.connectDevice(device.getAddress());
                             connecting = false;
+                            Log.d(TAG, "should be connected");
                         }
                     }.start();
                 } else {
                     connecting = false;
+                    Log.d(TAG, "device null");
                 }
             }
         }
