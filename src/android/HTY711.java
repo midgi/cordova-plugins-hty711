@@ -319,7 +319,7 @@ public class HTY711 extends CordovaPlugin {
             //         UIMessage.connecting_device, Toast.LENGTH_SHORT)
             //         .show();
         } else {
-            if (deviceConnected) {
+            if (isConnected()) {
                 connecting = false;
                 Log.d(TAG, "device is already connected");
             } else {
@@ -378,7 +378,7 @@ public class HTY711 extends CordovaPlugin {
     }
 
     public void cancelConnection(){
-        if (deviceConnected) {
+        if (isConnected()) {
             new Thread() {
                 public void run() {
                     deviceApi.cancel();
@@ -559,7 +559,7 @@ public class HTY711 extends CordovaPlugin {
     }
 
     public void disconnect(){
-        if (deviceConnected) {
+        if (isConnected()) {
             new Thread() {
                 public void run() {
                     deviceApi.disconnectDevice();
@@ -570,7 +570,7 @@ public class HTY711 extends CordovaPlugin {
     }
 
     public void updateWorkingKey(String tdk, String pik, String mak){
-        if (deviceConnected) {
+        if (isConnected()) {
             new Thread() {
                 public void run() {
                     deviceApi.updateWorkingKey(tdk, pik, mak);
